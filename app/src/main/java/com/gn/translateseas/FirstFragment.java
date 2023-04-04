@@ -2,28 +2,29 @@ package com.gn.translateseas;
 
 import static android.Manifest.permission.RECORD_AUDIO;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
+import com.amrdeveloper.lottiedialog.LottieDialog;
 import com.gn.translateseas.databinding.FragmentFirstBinding;
 
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ public class FirstFragment extends Fragment {
     private SpeechRecognizer speechRecognizer = null;
     private TextView textView;
     private LottieAnimationView lottie;
-
     private int RecordRequestCode = 1;
     private FragmentFirstBinding binding;
 
@@ -42,13 +42,13 @@ public class FirstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         if (ContextCompat.checkSelfPermission(getContext(), RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+
         }
         return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initComponents();
 
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
@@ -80,7 +80,6 @@ public class FirstFragment extends Fragment {
 
     //Revisa que los permisos para el audio esten permitidos
     private boolean checkPermission() {
-
         //Verifica que el permiso RECORD_AUDIO este garantizado
         if (ContextCompat.checkSelfPermission(getContext(), RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             String[] permisos = new String[]{RECORD_AUDIO};
@@ -91,66 +90,64 @@ public class FirstFragment extends Fragment {
         return true;
     }
 
-    private void changeFragment(){
-        FragmentManager manager = getActivity().getSupportFragmentManager();
-        SecondFragment fragment1 = new SecondFragment();
-        manager.beginTransaction()
-                .replace(R.id.nav_host_fragment_content_main, fragment1)
-                .addToBackStack(null)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .commit();
+    private void changeFragment(String cadena){
+        Bundle datos = new Bundle();
+        datos.putString("cadena", cadena);
+
+        NavHostFragment.findNavController(this)
+                .navigate(R.id.action_FirstFragment_to_SecondFragment,datos);
     }
 
     private RecognitionListener speechListener = new RecognitionListener() {
         @Override
-        public void onReadyForSpeech(Bundle bundle) {
-
-        }
+        public void onReadyForSpeech(Bundle bundle) {}
 
         @Override
         public void onBeginningOfSpeech() {
             textView.setText("");
-            textView.setHint("Lintening...");
-
+            textView.setHint("Grabando...");
         }
 
         @Override
-        public void onRmsChanged(float v) {
-
-        }
+        public void onRmsChanged(float v) {}
 
         @Override
-        public void onBufferReceived(byte[] bytes) {
-
-        }
+        public void onBufferReceived(byte[] bytes) {}
 
         @Override
-        public void onEndOfSpeech() {
-
-        }
+        public void onEndOfSpeech() {}
 
         @Override
         public void onError(int i) {
             lottie.pauseAnimation();
             lottie.setProgress(0);
-            Toast.makeText(getContext(), "Ha ocurrido un error " + i, Toast.LENGTH_SHORT).show();
+
+            LottieDialog dialog = new LottieDialog(getContext())
+                    .setAnimation(R.raw.error)
+                    .setAnimationRepeatCount(LottieDrawable.INFINITE)
+                    .setAutoPlayAnimation(true)
+                    .setMessage("Ha ocurrido un error...")
+                    .setMessageColor(Color.BLACK)
+                    .setDialogBackground(Color.WHITE)
+                    .setCancelable(true)
+                    .setOnShowListener(dialogInterface -> {})
+                    .setOnDismissListener(dialogInterface -> {})
+                    .setOnCancelListener(dialogInterface -> {});
+            dialog.show();
+
         }
 
         @Override
         public void onResults(Bundle bundle) {
-            ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-            textView.setText(data.get(0));
-
             lottie.setProgress(0);
             lottie.pauseAnimation();
 
-            changeFragment();
+            ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+            changeFragment(data.get(0));
         }
 
         @Override
-        public void onPartialResults(Bundle bundle) {
-
-        }
+        public void onPartialResults(Bundle bundle) {}
 
         @Override
         public void onEvent(int i, Bundle bundle) {
@@ -158,11 +155,11 @@ public class FirstFragment extends Fragment {
         }
     };
 
-    private View.OnTouchListener touchRecording = (view, motionEvent) -> {
+    @SuppressLint("ClickableViewAccessibility")
+    private final View.OnTouchListener touchRecording = (view, motionEvent) -> {
         if (checkPermission()) {
             //Si el usuario esta presionando el boton de grabar
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-
                 lottie.playAnimation();
                 speechRecognizer.startListening(speechIntent());
             }
@@ -172,7 +169,6 @@ public class FirstFragment extends Fragment {
                 lottie.pauseAnimation();
                 lottie.setProgress(0);
 
-                Log.e("Motion", "STOP");
                 speechRecognizer.stopListening();
             }
         }
