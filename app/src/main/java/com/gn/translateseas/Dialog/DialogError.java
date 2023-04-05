@@ -1,4 +1,4 @@
-package com.gn.translateseas;
+package com.gn.translateseas.Dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,6 +9,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.gn.translateseas.R;
 
 public class DialogError extends DialogFragment {
     @NonNull

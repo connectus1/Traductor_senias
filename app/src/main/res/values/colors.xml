@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="red">#EC4B4B</color>
+    <color name="morado">#613bde</color>
+    <color name="naranja">#de613b</color>
+    <color name="verde">#3bde61</color>
+    <color name="gris">#CECFCFCF</color>
+
+    <color name="transparente">#00000000</color>
 </resources>
