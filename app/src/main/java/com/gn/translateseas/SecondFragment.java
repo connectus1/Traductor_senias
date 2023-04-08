@@ -31,6 +31,7 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initComponents();
+        binding.btnReturn.setOnClickListener(clickReturn);
 
         //Si ocurre un error durante la obtencion de la cadena en los argumentos omite el Volley
         try{
@@ -68,7 +69,7 @@ public class SecondFragment extends Fragment {
 
     //Finaliza el fragment
     private View.OnClickListener clickReturn = View ->{
-        onDetach();
+        getActivity().onBackPressed();
     };
 
     @Override
