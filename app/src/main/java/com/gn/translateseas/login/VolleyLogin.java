@@ -1,9 +1,11 @@
 package com.gn.translateseas.login;
 
 import android.app.Activity;
+import android.app.backup.BackupAgent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -43,6 +45,7 @@ public class VolleyLogin extends Volley implements Response.Listener<String>, Re
         if (response.equals("0")){
             Toast.makeText(this.activity, "Correo o contraseña no coinciden", Toast.LENGTH_SHORT).show();
         }else if (response.equals("1")){
+
             if( ((Login)activity).isSaveAccount()) //Verifica si el Switch esta seleccionado
                 guardarCuentaPreferences(this.correo,this.contra);
 

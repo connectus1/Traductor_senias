@@ -1,4 +1,4 @@
-package com.gn.translateseas.RvImagenes;
+package com.gn.translateseas.Traductor;
 
 import android.content.Context;
 import android.view.LayoutInflater;

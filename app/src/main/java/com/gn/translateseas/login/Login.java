@@ -10,22 +10,32 @@ import com.gn.translateseas.BottomSheetDialog.BottomDialogRegister;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
-import androidx.navigation.ui.AppBarConfiguration;
 
+import com.gn.translateseas.R;
 import com.gn.translateseas.databinding.ActivityLoginBinding;
 
 public class Login extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
     private ActivityLoginBinding binding;
     private BottomDialogLogin bottomDialogLogin;
     private BottomDialogRegister bottomDialogRegister;
     private boolean isSaveAccount = false;
 
+    private void changeTheme(){
+        //Tiempo de espera de 2 segundos para cambiar el Theme de la aplicacion
+        try {
+            setTheme(R.style.Theme_TranslateSeñas_NoActionBar);
+            isLogin();
+
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        changeTheme(); //Para cambiar el tema actual
         super.onCreate(savedInstanceState);
-        isLogin();
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -35,14 +45,13 @@ public class Login extends AppCompatActivity {
     }
 
     //Despliega BottomSheetDialog para loguear un usuario
-    private View.OnClickListener clickShowLogin = view -> {
+    private final View.OnClickListener clickShowLogin = view -> {
         bottomDialogLogin = new BottomDialogLogin( this);
         bottomDialogLogin.show();
-
     };
 
     //Despliega BottomSheetDialog para registrar un nuevo usuario
-    private View.OnClickListener clickShowRegister = view -> {
+    private final View.OnClickListener clickShowRegister = view -> {
         bottomDialogRegister = new BottomDialogRegister(this);
         bottomDialogRegister.show();
     };
@@ -51,7 +60,7 @@ public class Login extends AppCompatActivity {
     public void getLogin(String correo, String contra){
         VolleyLogin login = new VolleyLogin(this, correo,contra);
         login.newRequest();
-    };
+    }
 
     //Se llama desde el BottomSheetDialog y ejecuta una peticion Volley
     //para registrar la informacion del usuario
@@ -90,6 +99,5 @@ public class Login extends AppCompatActivity {
 
         if (bottomDialogLogin != null)
             bottomDialogLogin.dismiss();
-
     }
 }

@@ -1,4 +1,4 @@
-package com.gn.translateseas.RvImagenes;
+package com.gn.translateseas.Traductor;
 
 public class Images {
     private String url;
