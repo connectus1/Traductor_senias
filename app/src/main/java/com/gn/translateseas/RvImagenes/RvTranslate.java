@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +35,8 @@ public class RvTranslate extends RecyclerView.Adapter<RvTranslate.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try{
             Glide.with(context).load(_array.get(position).getUrl()).into(holder.img);
+            holder.txt.setText(_array.get(position).getPlace());
+
         }catch (Exception e){e.printStackTrace();}
 
     }
@@ -45,9 +48,11 @@ public class RvTranslate extends RecyclerView.Adapter<RvTranslate.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView img;
+        public TextView txt;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.img = itemView.findViewById(R.id.imgTranslate);
+            this.txt = itemView.findViewById(R.id.txtTranslate);
         }
     }
 }

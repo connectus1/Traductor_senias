@@ -30,6 +30,7 @@
     <style name="AppBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModelStyle</item>
     </style>
+
     <style name="AppModelStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/round_bottom_dialog</item>
     </style>

@@ -18,12 +18,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TranslateSeñas">
         <activity
+            android:name=".Introduccion"
+            android:exported="true"
+            android:label="@string/title_activity_introduccion"
+            android:theme="@style/Theme.TranslateSeñas.NoActionBar" >
+
+        </activity>
+        <activity
             android:name=".login.Login"
             android:exported="true"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.TranslateSeñas.NoActionBar" >
+            android:theme="@style/Theme.TranslateSeñas.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,9 +39,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.TranslateSeñas.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.TranslateSeñas.NoActionBar"></activity>
     </application>
 
 </manifest>

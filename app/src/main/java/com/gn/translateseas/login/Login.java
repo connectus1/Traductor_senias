@@ -1,5 +1,7 @@
 package com.gn.translateseas.login;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.gn.translateseas.BottomSheetDialog.BottomDialogLogin;
@@ -18,10 +20,12 @@ public class Login extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private BottomDialogLogin bottomDialogLogin;
     private BottomDialogRegister bottomDialogRegister;
+    private boolean isSaveAccount = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isLogin();
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -54,6 +58,26 @@ public class Login extends AppCompatActivity {
     public void getRegister(String nombre, String correo, String contra){
         VolleyRegister register = new VolleyRegister(this, nombre, correo,contra);
         register.newRequest();
+    }
+
+    //Verifica si el usuario ya ha guardado datos de inicio de sesion.
+    private void isLogin(){
+        SharedPreferences preferences = getSharedPreferences("translate", Context.MODE_PRIVATE);
+        if (preferences.getString("correo", null) != null){
+            String correo = preferences.getString("correo", null);
+            String contra = preferences.getString("contra",null);
+
+            getLogin(correo,contra); //Llama al metodo GetLogin para que se inicie automaticamente
+        }
+
+    }
+
+    public boolean isSaveAccount() {
+        return isSaveAccount;
+    }
+
+    public void setSaveAccount(boolean saveAccount) {
+        isSaveAccount = saveAccount;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.gn.translateseas;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.gn.translateseas.RvImagenes.Images;
@@ -62,31 +59,30 @@ public class SecondFragment extends Fragment {
         this.lottieTemp = binding.lottieTemp;
     }
 
+    //Genera un StringRequest haciendo una peticion GET  a la API con los datos recolectados
     public void getImages(String token){
+        token = token.replaceAll("\\s","%20");
         request = new StringRequest(Request.Method.GET, url +"?palabra=" + token,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        List<Images> _array =  JsonToArray(response);
-                        RvTranslate rvObject = new RvTranslate(getContext(), _array);
+                response -> {
+                    List<Images> _array =  JsonToArray(response);
+                    RvTranslate rvObject = new RvTranslate(getContext(), _array);
 
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                        linearLayoutManager.setOrientation(linearLayoutManager.VERTICAL);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                    linearLayoutManager.setOrientation(linearLayoutManager.VERTICAL);
 
-                        rvImagenes.setAdapter(rvObject);
-                        rvImagenes.setLayoutManager(linearLayoutManager);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                viewError();
-                Toast.makeText(getContext(), error.getMessage() , Toast.LENGTH_SHORT).show();
-            }
-        });
+                    rvImagenes.setAdapter(rvObject);
+                    rvImagenes.setLayoutManager(linearLayoutManager);
+
+                }, error -> {
+
+                    viewError();
+                    Toast.makeText(getContext(), error.getMessage() , Toast.LENGTH_SHORT).show();
+                });
 
         Volley.newRequestQueue(getContext()).add(request);
     }
 
+    //Convierte el JSON en un arreglo con los elementos devueltos por la API
     private List<Images> JsonToArray(String jsonString){
         List<Images> _images = new ArrayList<>();
         try {
@@ -94,8 +90,7 @@ public class SecondFragment extends Fragment {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 String data = jsonArray.getString(i);
-                Log.e("imagenes", data);
-                _images.add(new Images(data, data));
+                _images.add(new Images(data, data.split("\\.")[0]));
             }
         } catch (JSONException e) {throw new RuntimeException(e);}
         return _images;
