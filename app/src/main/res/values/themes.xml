@@ -20,6 +20,8 @@
         <item name="windowActionBar">false</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/morado</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="switchStyle">@style/SCBSwitch</item>
+
     </style>
 
     <style name="Theme.TranslateSeñas.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -38,4 +40,15 @@
     <style name="SplashTheme" parent="Theme.TranslateSeñas.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
+
+    <!--  Style Switch  -->
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/morado</item>
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#f1f1f1</item>
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#42221f1f</item>
+    </style>
+
 </resources>

@@ -13,11 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.gn.translateseas.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RvTranslate extends RecyclerView.Adapter<RvTranslate.ViewHolder> {
-    private List<Images> _array = new ArrayList();
+    private List<Images> _array;
     private Context context;
 
     public RvTranslate(Context context, List<Images> _array) {

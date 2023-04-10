@@ -23,8 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.LottieDrawable;
-import com.amrdeveloper.lottiedialog.LottieDialog;
+import com.gn.translateseas.Dialog.DialogLottieError;
 import com.gn.translateseas.databinding.FragmentFirstBinding;
 
 import java.util.ArrayList;
@@ -42,7 +41,6 @@ public class FirstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         if (ContextCompat.checkSelfPermission(getContext(), RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-
         }
         return binding.getRoot();
     }
@@ -50,9 +48,7 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initComponents();
-
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
-        speechRecognizer.setRecognitionListener(speechListener);
+        createSpeech();
 
         binding.btnRecording.setOnTouchListener(touchRecording);
     }
@@ -63,11 +59,18 @@ public class FirstFragment extends Fragment {
         textView = binding.textviewFirst;
     }
 
+    private void createSpeech(){
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
+        speechRecognizer.setRecognitionListener(speechListener);
+    }
+
     //Genera un intent para reconocer el audio segun el Lenguaje configurado en el movil
     private Intent speechIntent() {
         Intent speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+
         speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
         return speechIntent;
     }
 
@@ -100,7 +103,9 @@ public class FirstFragment extends Fragment {
 
     private RecognitionListener speechListener = new RecognitionListener() {
         @Override
-        public void onReadyForSpeech(Bundle bundle) {}
+        public void onReadyForSpeech(Bundle bundle) {
+
+        }
 
         @Override
         public void onBeginningOfSpeech() {
@@ -122,25 +127,27 @@ public class FirstFragment extends Fragment {
             lottie.pauseAnimation();
             lottie.setProgress(0);
 
-            LottieDialog dialog = new LottieDialog(getContext())
-                    .setAnimation(R.raw.error)
-                    .setAnimationRepeatCount(LottieDrawable.INFINITE)
-                    .setAutoPlayAnimation(true)
-                    .setMessage("Ha ocurrido un error...")
-                    .setMessageColor(Color.BLACK)
-                    .setDialogBackground(Color.WHITE)
-                    .setCancelable(true)
-                    .setOnShowListener(dialogInterface -> {})
-                    .setOnDismissListener(dialogInterface -> {})
-                    .setOnCancelListener(dialogInterface -> {});
-            dialog.show();
+            textView.setText("");
+            if(speechRecognizer.ERROR_SPEECH_TIMEOUT  == i){
+                DialogLottieError dialogLottieError = new DialogLottieError(getContext(), R.raw.time_out);
+                dialogLottieError.setMessage("Tiempo de espera de voz agotado.");
+                dialogLottieError.setMessageColor(Color.BLACK);
+                dialogLottieError.show();
+            }
 
+            if (speechRecognizer.ERROR_AUDIO == i){
+                DialogLottieError dialogLottieError = new DialogLottieError(getContext(), R.raw.error);
+                dialogLottieError.setMessage("Error de grabacion.");
+                dialogLottieError.setMessageColor(Color.BLACK);
+                dialogLottieError.show();
+            }
         }
 
         @Override
         public void onResults(Bundle bundle) {
             lottie.setProgress(0);
             lottie.pauseAnimation();
+            textView.setText("");
 
             ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
             changeFragment(data.get(0));
@@ -157,14 +164,17 @@ public class FirstFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private final View.OnTouchListener touchRecording = (view, motionEvent) -> {
+
+
         if (checkPermission()) {
             //Si el usuario esta presionando el boton de grabar
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+
                 lottie.playAnimation();
                 speechRecognizer.startListening(speechIntent());
             }
 
-            //Si el usuarioi deja de presionar la grabacion
+            //Si el usuario deja de presionar la grabacion
             if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                 lottie.pauseAnimation();
                 lottie.setProgress(0);

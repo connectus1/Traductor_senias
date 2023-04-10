@@ -20,10 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nombre:"
-
-        android:layout_marginStart="20dp"
+        android:textSize="11sp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"/>
+        />
 
     <EditText
         android:id="@+id/txtUsuario"
@@ -31,36 +30,30 @@
         android:layout_height="35dp"
 
         android:background="@drawable/style_editext"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+
         />
 
     <TextView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="11sp"
         android:text="Correo electronico"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"/>
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:id="@+id/txtCorreo"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-
         android:background="@drawable/style_editext"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Contraseña"
-        android:layout_marginStart="20dp"
+        android:textSize="11sp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"/>
+        />
 
     <EditText
         android:id="@+id/txtContra"
@@ -68,8 +61,7 @@
         android:layout_height="35dp"
         android:background="@drawable/style_editext"
         android:inputType="textPassword"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+
         />
 
     <Button
@@ -80,9 +72,9 @@
 
         android:text="Registrarse"
         android:textColor="@color/white"
-        android:layout_marginStart="20dp"
+
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
+
 
         />
     <TextView
@@ -92,7 +84,6 @@
         android:textSize="12sp"
         android:textAlignment="center"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+
         android:layout_marginBottom="40dp"/>
 </LinearLayout>
