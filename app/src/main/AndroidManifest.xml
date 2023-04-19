@@ -37,4 +37,11 @@
             android:theme="@style/Theme.TranslateSeñas.NoActionBar"></activity>
     </application>
 
+    <!-- Android 11 > or hiGHER -->
+    <queries>
+        <intent>
+            <action android:name="android.speech.action.RECOGNIZE_SPEECH" />
+        </intent>
+    </queries>
+
 </manifest>

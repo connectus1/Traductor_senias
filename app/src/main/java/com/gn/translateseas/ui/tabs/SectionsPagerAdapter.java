@@ -24,6 +24,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
+
         mContext = context;
     }
 
@@ -37,6 +38,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         return null;
     }
+
 
     @Nullable
     @Override

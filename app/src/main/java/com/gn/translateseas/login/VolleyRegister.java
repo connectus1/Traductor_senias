@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.gn.translateseas.Introduccion;
 import com.gn.translateseas.MainActivity;
 
 public class VolleyRegister extends Volley implements Response.Listener<String>, Response.ErrorListener {
@@ -45,10 +46,14 @@ public class VolleyRegister extends Volley implements Response.Listener<String>,
         } else if (response.equals("0")) {
             Toast.makeText(activity, "Ya existe un correo registrado", Toast.LENGTH_SHORT).show();
         }else{
-            Intent intent = new Intent(activity, MainActivity.class);
-            activity.startActivity(intent);
-
+            Intent intentTutorial = new Intent(this.activity, Introduccion.class);
+            activity.startActivity(intentTutorial);
             activity.finish();
+
+//            Intent intent = new Intent(activity, MainActivity.class);
+//            activity.startActivity(intent);
+//
+//            activity.finish();
         }
     }
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -127,7 +128,9 @@ public class FirstFragment extends Fragment {
             lottie.pauseAnimation();
             lottie.setProgress(0);
 
-            textView.setText("");
+            Log.e("CodeErrorAudio", "" + i);
+
+            textView.setText("Graba tu mensaje");
             if(speechRecognizer.ERROR_SPEECH_TIMEOUT  == i){
                 DialogLottieError dialogLottieError = new DialogLottieError(getContext(), R.raw.time_out);
                 dialogLottieError.setMessage("Tiempo de espera de voz agotado.");
@@ -147,7 +150,7 @@ public class FirstFragment extends Fragment {
         public void onResults(Bundle bundle) {
             lottie.setProgress(0);
             lottie.pauseAnimation();
-            textView.setText("");
+            textView.setText("Graba tu mensaje");
 
             ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
             changeFragment(data.get(0));
@@ -165,11 +168,9 @@ public class FirstFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private final View.OnTouchListener touchRecording = (view, motionEvent) -> {
 
-
         if (checkPermission()) {
             //Si el usuario esta presionando el boton de grabar
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-
                 lottie.playAnimation();
                 speechRecognizer.startListening(speechIntent());
             }

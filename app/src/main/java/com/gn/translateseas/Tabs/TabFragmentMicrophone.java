@@ -38,6 +38,8 @@ public class TabFragmentMicrophone extends Fragment {
 
             Intent intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
+
+            getActivity().finish();
         }
     };
 
