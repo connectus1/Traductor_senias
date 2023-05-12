@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.gn.translateseas.R;
 
 import java.util.List;
@@ -33,7 +34,8 @@ public class RvTranslate extends RecyclerView.Adapter<RvTranslate.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try{
-            Glide.with(context).load(_array.get(position).getUrl()).into(holder.img);
+            RequestOptions options = new RequestOptions().fitCenter();
+            Glide.with(context).load(_array.get(position).getUrl()).apply(options).into(holder.img);
             holder.txt.setText(_array.get(position).getPlace());
 
         }catch (Exception e){e.printStackTrace();}
