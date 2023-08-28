@@ -9,7 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.gn.translateseas.SecondFragment;
+import com.gn.translateseas.FragmentTraduccion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,9 +21,9 @@ public class VolleyImages extends Volley implements Response.Listener<String>, R
     private String url = "https://www.Biosur365.com/Signslate/Api-get-images.php";
     private RequestImages requestImages;
     private String token;
-    private SecondFragment fragment;
+    private FragmentTraduccion fragment;
 
-    public VolleyImages(SecondFragment fragment, String token) {
+    public VolleyImages(FragmentTraduccion fragment, String token) {
         this.token = token.replaceAll("\\s","%20");
 
         this.fragment = fragment;
@@ -38,7 +38,7 @@ public class VolleyImages extends Volley implements Response.Listener<String>, R
 
     @Override
     public void onErrorResponse(VolleyError error) { //En caso de error
-        ((SecondFragment)fragment).viewError();
+        ((FragmentTraduccion)fragment).viewError();
         Toast.makeText(fragment.getActivity(), error.getMessage() , Toast.LENGTH_SHORT).show();
     }
 
@@ -47,7 +47,7 @@ public class VolleyImages extends Volley implements Response.Listener<String>, R
         List<Images> _array =  JsonToArray(response);
         RvTranslate rvObject = new RvTranslate(fragment.getActivity(), _array);
 
-        ((SecondFragment)fragment).setRVImagenes(rvObject);
+        ((FragmentTraduccion)fragment).setRVImagenes(rvObject);
     }
 
     //Convierte el JSON en un arreglo con los elementos devueltos por la API

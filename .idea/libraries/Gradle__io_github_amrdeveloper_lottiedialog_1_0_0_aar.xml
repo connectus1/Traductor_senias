@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: io.github.amrdeveloper:lottiedialog:1.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/fa797818be13cd48b0c88e939c6cfdde/transformed/lottiedialog-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fa797818be13cd48b0c88e939c6cfdde/transformed/lottiedialog-1.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fa797818be13cd48b0c88e939c6cfdde/transformed/lottiedialog-1.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bf069d7b5d17c9fc70db143b32e65598/transformed/lottiedialog-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bf069d7b5d17c9fc70db143b32e65598/transformed/lottiedialog-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/bf069d7b5d17c9fc70db143b32e65598/transformed/lottiedialog-1.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.amrdeveloper/lottiedialog/1.0.0/d8ffc3316ed9db18e1d9a90798d70670c700b68f/lottiedialog-1.0.0-javadoc.jar!/" />

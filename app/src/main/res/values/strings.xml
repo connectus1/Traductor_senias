@@ -11,9 +11,14 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_introduccion">Introduccion</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+
+    <!-- <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>-->
 
     <string name="tab_text_inicio">Habla en tu dispositivo y comunícate de manera efectiva con personas con discapacidad auditiva de todas las edades, sin necesidad de saber lenguaje de señas.</string>
     <string name="tab_text_microfono">Para poder utilizar nuestra aplicación es necesario que permitas el acceso al micrófono de tu dispositivo. Esto nos permitirá reconocer tu voz y traducirla en tiempo real al lenguaje de señas para una comunicación efectiva.</string>
+
+    <string-array name="array_lada">
+        <item>+52</item>
+    </string-array>
 </resources>
