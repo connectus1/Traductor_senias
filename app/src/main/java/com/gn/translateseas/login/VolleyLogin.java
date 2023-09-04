@@ -60,7 +60,6 @@ public class VolleyLogin extends Volley implements Response.Listener<String>, Re
                 jsonObject = new JSONObject(response);
                 jsonObject.put("correo", correo);
                 jsonObject.put("contra", contra);
-
                 guardarCuentaPreferences(jsonObject);
             }catch (Exception e){
                 Log.e("LoginJson", e.getMessage());

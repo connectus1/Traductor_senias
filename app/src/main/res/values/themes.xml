@@ -26,7 +26,6 @@
 
     <style name="Theme.TranslateSeñas.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.TranslateSeñas.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <!--  BottomSheetDialog  -->
     <style name="AppBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModelStyle</item>

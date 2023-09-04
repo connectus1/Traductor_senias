@@ -23,7 +23,7 @@ public class VolleyImages extends Volley implements Response.Listener<String>, R
     private String token;
     private FragmentTraduccion fragment;
 
-    public VolleyImages(FragmentTraduccion fragment, String token) {
+    public VolleyImages(@Nullable FragmentTraduccion fragment, String token) {
         this.token = token.replaceAll("\\s","%20");
 
         this.fragment = fragment;

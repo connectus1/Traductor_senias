@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.gn.translateseas.Chat.ActivityChat;
 import com.gn.translateseas.Dialog.DialogLottieError;
 import com.gn.translateseas.databinding.FragmentTraductorBinding;
 
@@ -52,6 +53,7 @@ public class FragmentTraductor extends Fragment {
         initComponents();
         createSpeech();
 
+        binding.imgChat.setOnClickListener(clickChat);
         binding.btnRecording.setOnTouchListener(touchRecording);
     }
 
@@ -187,5 +189,10 @@ public class FragmentTraductor extends Fragment {
 
         return false;
     };
+
+    private View.OnClickListener clickChat = (view -> {
+        Intent i = new Intent(view.getContext(), ActivityChat.class);
+        this.startActivity(i);
+    });
 
 }

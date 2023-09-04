@@ -4,7 +4,14 @@
 
     <uses-permission-sdk-23 android:name="android.permission.RECORD_AUDIO" />
     <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
+    <uses-permission-sdk-23 android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission-sdk-23 android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- Android 11 > or hiGHER -->
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- Lector de  Codigo QR -->
+    <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
+    <uses-permission-sdk-23 android:name="android.permission.VIBRATE" />
+
     <queries>
         <intent>
             <action android:name="android.speech.action.RECOGNIZE_SPEECH" />
@@ -19,13 +26,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TranslateSeñas">
         <activity
+            android:name=".Chat.ChatMessage"
+            android:exported="false"
+            android:theme="@style/Theme.TranslateSeñas.NoActionBar"/>
+        <activity
             android:name=".Chat.ActivityChat"
-            android:exported="false" />
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:theme="@style/Theme.TranslateSeñas.NoActionBar" />
         <activity
             android:name=".Introduccion"
             android:exported="true"
             android:label="@string/title_activity_introduccion"
-            android:theme="@style/Theme.TranslateSeñas.NoActionBar"></activity>
+            android:theme="@style/Theme.TranslateSeñas.NoActionBar" />
         <activity
             android:name=".login.ActivityLogin"
             android:exported="true"
